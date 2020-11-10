@@ -9,7 +9,7 @@ Para mais detalhes,  acesse o artigo completo: [clique aqui](https://aldinopolo.
 
 ---
 
-# **Importing data from Google Trens using R**
+# **Importing data from Google Trends using R**
 In this project, I show how to import data from Google Trends using the package 'gtrendsR' in R. Besides that I show how to plot this data using the native function of gtrendsR or using the package 'ggplot2'.
 
 For further details, access the complete article (in portuguese): [click here](https://aldinopolo.medium.com/importando-dados-do-google-trends-utilizando-r-f4a652a64a63).
