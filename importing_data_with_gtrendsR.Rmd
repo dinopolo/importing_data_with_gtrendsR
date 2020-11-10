@@ -1,0 +1,80 @@
+---
+title: "Importando as buscas do Google Trends usando R"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Instalando e carregando os pacotes necessários:**
+```{r}
+# Instalando os pacotes
+#install.packages("gtrendsR")
+#installpackages("ggplot2")
+
+# Carregando os pacotes
+library(gtrendsR)
+library(ggplot2)
+```
+
+**Pesquisando o termo "viagem"**:
+```{r}
+viagem = gtrends(keyword = "viagem")
+```
+
+**Exibindo o que está armazenado na variável viagem**:
+```{r}
+names(viagem)
+```
+
+**Visualizando as primeiras entradas**:
+```{r}
+head(viagem$interest_over_time)
+```
+
+**Plotando o gráfico**:
+```{r}
+plot(viagem)
+```
+
+**Definindo a localidade como Brasil e o período de janeiro de 2020 a outubro de 2020**:
+```{r}
+viagem = gtrends(keyword = "viagem", geo = "BR", time = "2020-01-01 2020-10-31")
+```
+
+**E plotando o novo gráfico**:
+```{r}
+plot(viagem)
+```
+
+**Comparando dois ou mais termos de busca**:
+```{r}
+viagem_pandemia = gtrends(keyword = c("viagem", "pandemia"), geo = "BR", time = "2020-01-01 2020-10-31")
+```
+
+**Fazendo o gráfico**:
+```{r}
+plot(viagem_pandemia)
+```
+
+**Extraindo os dados do Google Trends e definindo o interest_over_time em um Data Frame separado**:
+```{r}
+# Extraindo os dados do Google Trends
+viagem = gtrends(keyword = "viagem", geo = "BR", time = "2020-01-01 2020-10-31")
+
+# Definindo o interest_over_time em um Data Frame separado
+viagem_trend = viagem$interest_over_time
+```
+
+**Visualizando as primeiras entradas do Data Frame viagem_trend**:
+```{r}
+head(viagem_trend)
+```
+
+**Fazendo o gráfico utilizando o ggplot2**:
+```{r}
+viagem_plot = ggplot(data=viagem_trend, aes(x=as.Date(date), y=as.numeric(hits), group=keyword, col=keyword)) + geom_line(color="Blue") + xlab("Período das buscas") + ylab("Volume das buscas") + ggtitle("Buscas, no Brasil, pelo termo 'viagem' no período de 01/01/2020 até 31/10/2020 ") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+viagem_plot
+```
+
